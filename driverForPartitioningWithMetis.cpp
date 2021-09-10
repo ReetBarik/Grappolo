@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
         case 5: loadMetisFileFormat(G, inFile); break;
         case 6: parse_UndirectedEdgeList(G, inFile); break;
             //parse_UndirectedEdgeListDarpaHive(G, inFile); break;
-        case 7: parse_UndirectedEdgeListDarpaHive(G, inFile); break;
+        case 7: parse_UndirectedEdgeListWeighted(G, inFile); break;
         //printf("This routine is under development.\n"); exit(1); break;
                 /*parse_DirectedEdgeList(G, inFile); break;*/
         case 8: parse_SNAP(G, inFile); break;
@@ -105,8 +105,8 @@ int main(int argc, char** argv) {
   long NV = G->numVertices;
   long *vPart = (long *) malloc (NV * sizeof(long)); assert(vPart != 0);
   
-  int myVec[6]={2,4,8,16,32,64};
-  for (int i=0; i<6; i++) {       
+  int myVec[3]={4,16,64};
+  for (int i=0; i<3; i++) {       
        char outFile[256];
        sprintf(outFile,"%s_%d", opts.inFile, myVec[i]);       
        printf("Processing with %d partitions; will be stored in file: %s\n", myVec[i], outFile);
