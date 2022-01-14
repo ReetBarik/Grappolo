@@ -105,12 +105,15 @@ int main(int argc, char** argv) {
   long NV = G->numVertices;
   long *vPart = (long *) malloc (NV * sizeof(long)); assert(vPart != 0);
   
-  int myVec[3]={4,16,64};
-  for (int i=0; i<3; i++) {       
+  int myVec[4]={4,16,64,256};
+  for (int i=0; i<4; i++) {       
        char outFile[256];
        sprintf(outFile,"%s_%d", opts.inFile, myVec[i]);       
        printf("Processing with %d partitions; will be stored in file: %s\n", myVec[i], outFile);
+       double time1 = omp_get_wtime();
        MetisGraphPartitioner( G, vPart, myVec[i]);
+       double time2 = omp_get_wtime();
+       printf("Time to partition into %d partitions:  %lf\n", myVec[i], time2 - time1);
        FILE* out = fopen(outFile,"w");
        for(long i = 0; i<NV;i++) {
           fprintf(out,"%ld\n",vPart[i]);
