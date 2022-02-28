@@ -193,8 +193,8 @@ void MetisGraphPartitioner( graph *G, long *VertexPartitioning, int numParts ) {
   }
   
   //Cleaup:
-  free(xadj); free(adjncy); free(adjwgt);
-  free(part);
+  // free(xadj); free(adjncy); free(adjwgt);
+  // free(part);
   printf("Returning back from Metis\n");
 }
 
