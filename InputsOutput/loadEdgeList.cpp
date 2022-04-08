@@ -3,7 +3,7 @@
 #include "sstream"
 #include "utilityStringTokenizer.hpp"
 
-void parse_DirectedEdgeList(dGraph * G, char *fileName) {
+void parse_DirectedEdgeListWeighted(dGraph * G, char *fileName) {
     printf("Parsing Directed Edge List formatted file as a directed graph...\n");
     printf("Assumes no information is provided and that vertices are numbered contiguous ...\n");
     int nthreads = 0;
@@ -21,10 +21,11 @@ void parse_DirectedEdgeList(dGraph * G, char *fileName) {
     }
     long NV=0, NE=0;
     long nv1, nv2;
+    double twt;
     //Count number of vertices and edges
     while(!feof(file))
     {
-        fscanf(file, "%ld %ld", &nv1, &nv2);
+        fscanf(file, "%ld %ld %lf", &nv1, &nv2, &twt);
         if(nv1 > NV)
             NV = nv1;
         if(nv2 > NV)
@@ -49,7 +50,7 @@ void parse_DirectedEdgeList(dGraph * G, char *fileName) {
     time1 = omp_get_wtime();
     long mycount = 0;
     for (long i = 0; i < NE; i++) {
-        fscanf(file, "%ld %ld", &Si, &Ti);
+        fscanf(file, "%ld %ld %lf", &Si, &Ti, &Twt);
         //fscanf(file, "%ld %ld %lf", &Si, &Ti, &Twt);
 #if defined(DEL_ZERO_BASED)
 #else
@@ -364,7 +365,7 @@ void parse_UndirectedEdgeListWeighted(graph * G, char *fileName) {
         assert((Ti >= 0)&&(Ti < NV));
         tmpEdgeList[i].head   = Si;  //The S index
         tmpEdgeList[i].tail   = Ti;  //The T index: Zero-based indexing
-        tmpEdgeList[i].weight = Twt;   //Make it positive and cast to Double
+        tmpEdgeList[i].weight = (1000 * Twt) + 1;   //Make it positive and cast to Double
     }//End of while()
     fclose(file); //Close the file
     time2 = omp_get_wtime();

@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
         case 7: parse_UndirectedEdgeListWeighted(G, inFile); break;
         //printf("This routine is under development.\n"); exit(1); break;
                 /*parse_DirectedEdgeList(G, inFile); break;*/
-        case 8: parse_SNAP(G, inFile); break;
+        case 8: parse_UndirectedEdgeListWeighted(G, inFile); break;
         case 9: parse_EdgeListBinaryNew(G,inFile); break;
         case 10:
 #ifdef USEHDF5                

@@ -105,8 +105,8 @@ int main(int argc, char** argv) {
   long NV = G->numVertices;
   long *vPart = (long *) malloc (NV * sizeof(long)); assert(vPart != 0);
   
-  int myVec[2]={4, 16};
-  for (int i=0; i<2; i++) {       
+  int myVec[1]={2048};
+  for (int i=0; i<1; i++) {       
        char outFile[256];
        sprintf(outFile,"%s_%d", opts.inFile, myVec[i]);       
        printf("Processing with %d partitions; will be stored in file: %s\n", myVec[i], outFile);
